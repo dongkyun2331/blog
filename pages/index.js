@@ -16,10 +16,10 @@ export default function Home({ allPostsData }) {
   return (
     <div className={utilStyles.container}>
       <Head>
-        <title>My Blog</title>
+        <title>Fori Blog</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <p>Welcome to my blog!</p>
+        <p>Welcome to Fori Blog!</p>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
