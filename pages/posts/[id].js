@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import { getAllPostIds, getPostData } from "../../lib/posts";
 import utilStyles from "../../styles/utils.module.css";
 import { useEffect } from "react";
@@ -61,13 +62,18 @@ export default function Post({ postData }) {
 
   return (
     <div className={utilStyles.container}>
+      <nav>
+        <Link href="/">
+          <h1>FORI</h1>
+        </Link>
+      </nav>
       <Head>
         <title>{postData.title}</title>
       </Head>
       <article>
         <h1 className={utilStyles.headingXl}>{postData.title}</h1>
         <div className={utilStyles.lightText}>{postData.date}</div>
-        <div className={utilStyles.lightText}>Author: {postData.author}</div>
+        <div className={utilStyles.lightText}>작성자: {postData.author}</div>
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
       </article>
     </div>

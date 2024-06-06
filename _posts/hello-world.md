@@ -1,7 +1,7 @@
 ---
 title: "Hello World"
 date: "2024-06-02"
-author: "Fori"
+author: "포리"
 ---
 
 # hello
