@@ -62,11 +62,6 @@ export default function Post({ postData }) {
 
   return (
     <div className={utilStyles.container}>
-      <nav>
-        <Link href="/">
-          <h1>FORI</h1>
-        </Link>
-      </nav>
       <Head>
         <title>{postData.title}</title>
       </Head>

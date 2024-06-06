@@ -1,8 +1,14 @@
-import 'prismjs/themes/prism-okaidia.css'
-import '../styles/globals.css'
+import "prismjs/themes/prism-okaidia.css";
+import "../styles/globals.css";
+import "../components/Layout";
+import Layout from "../components/Layout";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  );
 }
 
-export default MyApp
+export default MyApp;

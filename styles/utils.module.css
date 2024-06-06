@@ -26,3 +26,60 @@
 .listItem {
   margin: 0 0 1.25rem;
 }
+
+.sidebarButton {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #0070f3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.popularSearches {
+  margin-bottom: 20px;
+}
+
+.popularSearchList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.popularSearchItem {
+  display: inline;
+  margin-right: 10px;
+  padding: 5px 10px;
+  background: #f0f0f0;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.popularSearchItem:hover {
+  background: #ddd;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.listItem {
+  margin: 10px 0;
+}
+
+.lightText {
+  color: #666;
+}
