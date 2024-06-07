@@ -19,8 +19,8 @@ export default function Layout({ children }) {
       <Head>
         <title>포리</title>
       </Head>
-      <nav>
-        <Link href="/">
+      <nav className={utilStyles.nav}>
+        <Link href="/" style={{ textDecoration: "none", color: "inherit" }}>
           <h1>FORI</h1>
         </Link>
       </nav>
@@ -43,7 +43,6 @@ export default function Layout({ children }) {
         </svg>
       </button>
       <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar}>
-        <h2 className={utilStyles.headingLg}>YouTube Audio Player</h2>
         <YoutubeAudioPlayer />
       </Sidebar>
     </div>
