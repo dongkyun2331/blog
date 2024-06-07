@@ -2,15 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import utilStyles from "../styles/utils.module.css";
 
-const popularSearchKeywords = [
-  "React",
-  "Next.js",
-  "JavaScript",
-  "CSS",
-  "HTML",
-  "hello",
-  "world",
-];
+const popularSearchKeywords = ["ubuntu"];
 
 export default function DynamicBlogList({ allPostsData }) {
   const [searchQuery, setSearchQuery] = useState("");

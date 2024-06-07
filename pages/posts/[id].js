@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Link from "next/link";
 import { getAllPostIds, getPostData } from "../../lib/posts";
 import utilStyles from "../../styles/utils.module.css";
 import { useEffect } from "react";
@@ -64,11 +63,25 @@ export default function Post({ postData }) {
     <div className={utilStyles.container}>
       <Head>
         <title>{postData.title}</title>
+        <meta name="description" content={postData.description} />
+        <meta name="keywords" content={postData.keywords.join(", ")} />
+        <meta name="author" content={postData.author} />
+        <meta property="og:title" content={postData.title} />
+        <meta property="og:description" content={postData.description} />
+        <meta property="og:type" content="article" />
+        <meta
+          property="og:url"
+          content={`https://fori8181.vercel.app/posts/${postData.id}`}
+        />
+        <meta
+          property="og:image"
+          content="https://fori8181.vercel.app/static/images/og-image.png"
+        />
       </Head>
       <article>
         <h1 className={utilStyles.headingXl}>{postData.title}</h1>
         <div className={utilStyles.lightText}>{postData.date}</div>
-        <div className={utilStyles.lightText}>작성자: {postData.author}</div>
+        <div className={utilStyles.lightText}>Author: {postData.author}</div>
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
       </article>
     </div>
