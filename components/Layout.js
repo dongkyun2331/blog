@@ -16,9 +16,6 @@ export default function Layout({ children }) {
 
   return (
     <div className={utilStyles.container}>
-      <Head>
-        <title>포리</title>
-      </Head>
       <nav className={utilStyles.nav}>
         <Link href="/" style={{ textDecoration: "none", color: "inherit" }}>
           <h1>FORI</h1>

@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://fori8181.vercel.app
+
+# Sitemaps
+Sitemap: https://fori8181.vercel.app/sitemap.xml
