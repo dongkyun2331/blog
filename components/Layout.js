@@ -26,7 +26,21 @@ export default function Layout({ children }) {
       </nav>
       {children}
       <button onClick={toggleSidebar} className={utilStyles.sidebarButton}>
-        =
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24"
+          viewBox="0 0 4"
+          width="24"
+          focusable="false"
+          style={{
+            pointerEvents: "none",
+            display: "inherit",
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          <path d="M21 6H3V5h18v1zm0 5H3v1h18v-1zm0 6H3v1h18v-1z"></path>
+        </svg>
       </button>
       <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar}>
         <h2 className={utilStyles.headingLg}>YouTube Audio Player</h2>

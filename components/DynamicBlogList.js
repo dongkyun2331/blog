@@ -31,11 +31,9 @@ export default function DynamicBlogList({ allPostsData }) {
 
   return (
     <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-      <h2 className={utilStyles.headingLg}>Blog</h2>
-
       <input
         type="text"
-        placeholder="Search posts..."
+        placeholder="검색"
         value={searchQuery}
         onChange={handleSearchChange}
         className={utilStyles.searchInput}
@@ -57,14 +55,13 @@ export default function DynamicBlogList({ allPostsData }) {
 
       <div className={utilStyles.sortOptions}>
         <label>
-          Sort by:
           <select
             value={sortOrder}
             onChange={handleSortChange}
             className={utilStyles.sortSelect}
           >
-            <option value="newest">Newest</option>
-            <option value="oldest">Oldest</option>
+            <option value="newest">최신순</option>
+            <option value="oldest">날짜순</option>
           </select>
         </label>
       </div>
