@@ -54,7 +54,28 @@ export default function Post({ postData }) {
         copyToClipboard(code.innerText, button);
       });
 
+      // Extract the language class from the code element
+      const languageClass = code.className
+        .split(" ")
+        .find((cls) => cls.startsWith("language-"));
+      if (languageClass) {
+        const language = languageClass.replace("language-", "");
+        const langLabel = document.createElement("span");
+        langLabel.innerText = language;
+        langLabel.style.position = "absolute";
+        langLabel.style.top = "5px";
+        langLabel.style.left = "5px";
+        langLabel.style.background = "#333";
+        langLabel.style.color = "white";
+        langLabel.style.padding = "2px 5px";
+        langLabel.style.fontSize = "0.8em";
+        langLabel.style.borderRadius = "3px";
+        langLabel.style.marginRight = "10px"; // Add margin to separate from the code
+        pre.appendChild(langLabel);
+      }
+
       pre.style.position = "relative";
+      pre.style.paddingTop = "30px"; // Add padding to prevent overlap with the buttons and labels
       pre.appendChild(button);
     });
   }, []);
