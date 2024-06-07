@@ -1,7 +1,7 @@
 .container {
   max-width: 36rem;
   padding: 0 1rem;
-  margin: 1rem auto 6rem;
+  margin: 5rem auto 6rem;
 }
 
 .headingXl {
@@ -53,12 +53,31 @@
 }
 
 .popularSearches {
-  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.slider {
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  display: flex;
+  flex: 1;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.slider::-webkit-scrollbar {
+  display: none; /* Webkit (Chrome, Safari, Edge) */
 }
 
 .popularSearchList {
-  list-style-type: none;
+  display: flex;
+  flex-wrap: nowrap;
+  list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .popularSearchItem {
@@ -69,10 +88,26 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s;
+  white-space: nowrap;
+  flex: 0 0 auto;
 }
 
 .popularSearchItem:hover {
   background: #ddd;
+}
+
+.navButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 5px;
+  z-index: 1;
+}
+
+.navButton:disabled {
+  cursor: not-allowed;
+  color: #ccc;
 }
 
 .list {
