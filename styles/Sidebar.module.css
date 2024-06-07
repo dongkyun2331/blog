@@ -33,3 +33,12 @@
   top: 20px;
   left: 20px;
 }
+
+.githubIcon {
+  padding: 20px;
+  text-align: bottom;
+}
+
+.githubIcon a {
+  color: inherit;
+}
