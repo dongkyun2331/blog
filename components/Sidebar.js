@@ -1,9 +1,8 @@
-// components/Sidebar.js
-
 import { useEffect } from "react";
 import styles from "../styles/Sidebar.module.css";
 import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function Sidebar({ isOpen, onClose, children }) {
   useEffect(() => {
@@ -18,6 +17,8 @@ export default function Sidebar({ isOpen, onClose, children }) {
     };
   }, [onClose]);
 
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
       <div className={styles.sidebarContent}>
@@ -25,7 +26,7 @@ export default function Sidebar({ isOpen, onClose, children }) {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
-            viewBox="0 0 4"
+            viewBox="0 0 24 24"
             width="24"
             focusable="false"
             style={{
@@ -43,6 +44,9 @@ export default function Sidebar({ isOpen, onClose, children }) {
             <h1>FORI</h1>
           </Link>
         </nav>
+        <button onClick={toggleTheme} style={{marginBottom:"10px"}}>
+          Switch to {theme === "light" ? "Dark" : "Light"} Mode
+        </button>
         {children}
         <div className={styles.githubIcon}>
           <a
