@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import utilStyles from "../styles/utils.module.css";
 
-const popularSearchKeywords = ["우분투", "자바스크립트", "js", "javascript"];
+const popularSearchKeywords = ["우분투", "자바스크립트"];
 
 export default function DynamicBlogList({ allPostsData }) {
   const [searchQuery, setSearchQuery] = useState("");
