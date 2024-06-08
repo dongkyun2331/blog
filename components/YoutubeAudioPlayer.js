@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import YouTube from "react-youtube";
 
 const YoutubeAudioPlayer = () => {
   const [videoId, setVideoId] = useState("");
   const [inputValue, setInputValue] = useState("");
+  const playerRef = useRef(null);
 
   const extractVideoId = (url) => {
     try {
@@ -28,6 +29,28 @@ const YoutubeAudioPlayer = () => {
     }
   };
 
+  const onPlayerReady = (event) => {
+    playerRef.current = event.target;
+  };
+
+  const handlePlay = () => {
+    if (playerRef.current) {
+      playerRef.current.playVideo();
+    }
+  };
+
+  const handlePause = () => {
+    if (playerRef.current) {
+      playerRef.current.pauseVideo();
+    }
+  };
+
+  const handleStop = () => {
+    if (playerRef.current) {
+      playerRef.current.stopVideo();
+    }
+  };
+
   const opts = {
     height: "0",
     width: "0",
@@ -44,8 +67,15 @@ const YoutubeAudioPlayer = () => {
         onChange={handleInputChange}
         placeholder="Enter YouTube URL"
       />
-      <button onClick={handlePlayAudio}>Play Audio</button>
-      {videoId && <YouTube videoId={videoId} opts={opts} />}
+      <button onClick={handlePlayAudio}>Load Video</button>
+      {videoId && (
+        <div>
+          <YouTube videoId={videoId} opts={opts} onReady={onPlayerReady} />
+          <button onClick={handlePlay}>Play</button>
+          <button onClick={handlePause}>Pause</button>
+          <button onClick={handleStop}>Stop</button>
+        </div>
+      )}
     </div>
   );
 };
