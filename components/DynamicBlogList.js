@@ -45,9 +45,16 @@ export default function DynamicBlogList({ allPostsData }) {
   };
 
   const filteredPosts = allPostsData
-    .filter(({ title }) =>
-      title.toLowerCase().includes(searchQuery.toLowerCase())
-    )
+    .filter(({ title, keywords }) => {
+      const lowerSearchQuery = searchQuery.toLowerCase();
+      return (
+        (title && title.toLowerCase().includes(lowerSearchQuery)) ||
+        (keywords &&
+          keywords.some((keyword) =>
+            keyword.toLowerCase().includes(lowerSearchQuery)
+          ))
+      );
+    })
     .sort((a, b) => {
       if (sortOrder === "newest") {
         return new Date(b.date) - new Date(a.date);
@@ -106,11 +113,14 @@ export default function DynamicBlogList({ allPostsData }) {
       </div>
 
       <ul className={utilStyles.list}>
-        {filteredPosts.map(({ id, date, title }) => (
-          <li className={utilStyles.listItem} key={id}>
-            <Link href={`/posts/${id}`}>{title}</Link>
-            <br />
-            <small className={utilStyles.lightText}>{date}</small>
+        {filteredPosts.map(({ id, date, title, keywords }) => (
+          <li key={id}>
+            <Link href={`/posts/${id}`}>
+              <h3>{title}</h3>
+            </Link>
+            <p className={utilStyles.lightText}>
+              {date} - {keywords ? keywords.join(", ") : ""}
+            </p>
           </li>
         ))}
       </ul>

@@ -1,6 +1,5 @@
 .container {
   max-width: 36rem;
-  padding: 0 1rem;
   margin: 5rem auto 6rem;
 }
 
@@ -11,15 +10,6 @@
 
 .lightText {
   color: #666;
-}
-
-.list {
-  list-style: none;
-  padding: 0;
-}
-
-.listItem {
-  margin: 0 0 1.25rem;
 }
 
 .nav {
@@ -114,10 +104,6 @@
 .list {
   list-style: none;
   padding: 0;
-}
-
-.listItem {
-  margin: 10px 0;
 }
 
 .lightText {
