@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import YouTube from "react-youtube";
+import { FaPlay, FaPause, FaStop } from "react-icons/fa";
 
 const YoutubeAudioPlayer = () => {
   const [videoId, setVideoId] = useState("");
@@ -51,6 +52,12 @@ const YoutubeAudioPlayer = () => {
     }
   };
 
+  const onPlayerEnd = () => {
+    if (playerRef.current) {
+      playerRef.current.playVideo(); // 비디오가 끝날 때 다시 재생
+    }
+  };
+
   const opts = {
     height: "0",
     width: "0",
@@ -65,15 +72,26 @@ const YoutubeAudioPlayer = () => {
         type="text"
         value={inputValue}
         onChange={handleInputChange}
-        placeholder="Enter YouTube URL"
+        placeholder="YouTube URL"
       />
-      <button onClick={handlePlayAudio}>Load Video</button>
+      <button onClick={handlePlayAudio}>Load Mp3</button>
       {videoId && (
         <div>
-          <YouTube videoId={videoId} opts={opts} onReady={onPlayerReady} />
-          <button onClick={handlePlay}>Play</button>
-          <button onClick={handlePause}>Pause</button>
-          <button onClick={handleStop}>Stop</button>
+          <YouTube
+            videoId={videoId}
+            opts={opts}
+            onReady={onPlayerReady}
+            onEnd={onPlayerEnd} // 비디오가 끝날 때 이벤트 핸들러
+          />
+          <button onClick={handlePlay}>
+            <FaPlay />
+          </button>
+          <button onClick={handlePause}>
+            <FaPause />
+          </button>
+          <button onClick={handleStop}>
+            <FaStop />
+          </button>
         </div>
       )}
     </div>
