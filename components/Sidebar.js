@@ -3,6 +3,11 @@ import styles from "../styles/Sidebar.module.css";
 import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 import { useTheme } from "@/context/ThemeContext";
+import dynamic from "next/dynamic";
+
+const ConnectButton = dynamic(() => import("./ConnectButton"), {
+  ssr: false,
+});
 
 export default function Sidebar({ isOpen, onClose, children }) {
   useEffect(() => {
@@ -44,9 +49,10 @@ export default function Sidebar({ isOpen, onClose, children }) {
             <h1>FORI</h1>
           </Link>
         </nav>
-        <button onClick={toggleTheme} style={{marginBottom:"10px"}}>
+        <button onClick={toggleTheme}>
           Switch to {theme === "light" ? "Dark" : "Light"} Mode
         </button>
+        <ConnectButton />
         {children}
         <div className={styles.githubIcon}>
           <a
