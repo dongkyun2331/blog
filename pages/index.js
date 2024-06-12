@@ -42,6 +42,8 @@ export default function Home({ allPostsData }) {
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="google-adsense-account" content="ca-pub-7533992287093885"></meta>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7533992287093885"
+     crossorigin="anonymous"></script>
       </Head>
       <DynamicBlogList allPostsData={allPostsData} />
     </>
