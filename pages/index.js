@@ -2,6 +2,9 @@
 import dynamic from "next/dynamic";
 import { getSortedPostsData } from "../lib/posts";
 import Head from "next/head";
+import Script from "next/script";
+
+const gaId = process.env.gaId;
 
 const DynamicBlogList = dynamic(() => import("../components/DynamicBlogList"));
 
@@ -41,6 +44,22 @@ export default function Home({ allPostsData }) {
           content="https://fori8181.vercel.app/image.jpg"
         />
         <meta name="twitter:card" content="summary_large_image" />
+        <Script
+          async
+          src={`https://www.googletagmanager.com/gtag/js
+				?id=${gaId}`}
+        />
+        <Script
+          id="google-analytics"
+          dangerouslySetInnerHTML={{
+            __html: `
+		      window.dataLayer = window.dataLayer || [];
+		      function gtag(){dataLayer.push(arguments);}
+		      gtag('js', new Date());
+          gtag('config', '${gaId}');
+		      `,
+          }}
+        />
       </Head>
       <DynamicBlogList allPostsData={allPostsData} />
     </>
