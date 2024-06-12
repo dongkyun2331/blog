@@ -41,6 +41,7 @@ export default function Home({ allPostsData }) {
           content="https://fori8181.vercel.app/image.jpg"
         />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="google-adsense-account" content="ca-pub-7533992287093885"></meta>
       </Head>
       <DynamicBlogList allPostsData={allPostsData} />
     </>
