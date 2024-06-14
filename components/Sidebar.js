@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styles from "../styles/Sidebar.module.css";
 import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 import { useTheme } from "@/context/ThemeContext";
 
 export default function Sidebar({ isOpen, onClose, children }) {
-  const [visitorCount, setVisitorCount] = useState(0);
-
   useEffect(() => {
     const handleEscape = (event) => {
       if (event.key === "Escape") {
@@ -18,20 +16,6 @@ export default function Sidebar({ isOpen, onClose, children }) {
       document.removeEventListener("keydown", handleEscape);
     };
   }, [onClose]);
-
-  useEffect(() => {
-    const fetchVisitorCount = async () => {
-      try {
-        const response = await fetch('/api/visitors');
-        const data = await response.json();
-        setVisitorCount(data.count);
-      } catch (error) {
-        console.error('Failed to fetch visitor count:', error);
-      }
-    };
-
-    fetchVisitorCount();
-  }, []);
 
   const { theme, toggleTheme } = useTheme();
 
@@ -63,9 +47,6 @@ export default function Sidebar({ isOpen, onClose, children }) {
         <button onClick={toggleTheme}>
           Switch to {theme === "light" ? "Dark" : "Light"} Mode
         </button>
-        <p className={styles.visitorCount}>
-          Visitor Count: {visitorCount}
-        </p>
         {children}
         <div className={styles.githubIcon}>
           <a
