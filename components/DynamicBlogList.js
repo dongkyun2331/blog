@@ -4,6 +4,14 @@ import utilStyles from "../styles/utils.module.css";
 
 const popularSearchKeywords = ["우분투", "js"];
 
+// 영어와 한글 키워드 매핑
+const keywordMapping = {
+  우분투: "ubuntu",
+  ubuntu: "우분투",
+  js: "자바스크립트",
+  자바스크립트: "js"
+};
+
 export default function DynamicBlogList({ allPostsData }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOrder, setSortOrder] = useState("newest");
@@ -44,14 +52,21 @@ export default function DynamicBlogList({ allPostsData }) {
     }
   };
 
+  const mapKeyword = (keyword) => {
+    return keywordMapping[keyword] || keyword;
+  };
+
   const filteredPosts = allPostsData
     .filter(({ title, keywords }) => {
       const lowerSearchQuery = searchQuery.toLowerCase();
+      const mappedSearchQuery = mapKeyword(lowerSearchQuery);
       return (
         (title && title.toLowerCase().includes(lowerSearchQuery)) ||
+        (title && title.toLowerCase().includes(mappedSearchQuery)) ||
         (keywords &&
-          keywords.some((keyword) =>
-            keyword.toLowerCase().includes(lowerSearchQuery)
+          keywords.some((keyword) => 
+            keyword.toLowerCase().includes(lowerSearchQuery) || 
+            keyword.toLowerCase().includes(mappedSearchQuery)
           ))
       );
     })
