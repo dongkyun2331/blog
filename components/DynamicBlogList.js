@@ -9,13 +9,15 @@ const keywordMapping = {
   우분투: "ubuntu",
   ubuntu: "우분투",
   js: "자바스크립트",
-  자바스크립트: "js"
+  자바스크립트: "js",
 };
 
 export default function DynamicBlogList({ allPostsData }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOrder, setSortOrder] = useState("newest");
   const [showNavButtons, setShowNavButtons] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 10;
   const sliderRef = useRef(null);
 
   useEffect(() => {
@@ -34,10 +36,12 @@ export default function DynamicBlogList({ allPostsData }) {
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
+    setCurrentPage(1);
   };
 
   const handleSortChange = (e) => {
     setSortOrder(e.target.value);
+    setCurrentPage(1);
   };
 
   const handleNext = () => {
@@ -64,9 +68,10 @@ export default function DynamicBlogList({ allPostsData }) {
         (title && title.toLowerCase().includes(lowerSearchQuery)) ||
         (title && title.toLowerCase().includes(mappedSearchQuery)) ||
         (keywords &&
-          keywords.some((keyword) => 
-            keyword.toLowerCase().includes(lowerSearchQuery) || 
-            keyword.toLowerCase().includes(mappedSearchQuery)
+          keywords.some(
+            (keyword) =>
+              keyword.toLowerCase().includes(lowerSearchQuery) ||
+              keyword.toLowerCase().includes(mappedSearchQuery)
           ))
       );
     })
@@ -77,6 +82,12 @@ export default function DynamicBlogList({ allPostsData }) {
         return new Date(a.date) - new Date(b.date);
       }
     });
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
 
   return (
     <section>
@@ -128,7 +139,7 @@ export default function DynamicBlogList({ allPostsData }) {
       </div>
 
       <ul className={utilStyles.list}>
-        {filteredPosts.map(({ id, date, title, keywords }) => (
+        {currentPosts.map(({ id, date, title, keywords }) => (
           <li key={id}>
             <Link href={`/posts/${id}`}>
               <h3>{title}</h3>
@@ -139,6 +150,26 @@ export default function DynamicBlogList({ allPostsData }) {
           </li>
         ))}
       </ul>
+
+      <div className={utilStyles.pagination}>
+        <button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+        >
+          이전
+        </button>
+        <span>
+          {currentPage} / {totalPages}
+        </span>
+        <button
+          onClick={() =>
+            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+          }
+          disabled={currentPage === totalPages}
+        >
+          다음
+        </button>
+      </div>
     </section>
   );
 }
