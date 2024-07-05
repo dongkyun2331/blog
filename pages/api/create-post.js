@@ -33,16 +33,17 @@ ${content}
       // 파일 작성
       await fs.promises.writeFile(filePath, fileContent);
 
-      // Git 커밋
+      // Git 커밋 및 푸시
       const git = simpleGit();
       await git.add(filePath);
       await git.commit(`Add new post: ${nextPostNumber}. ${title}`);
+      await git.push("origin", "main"); // 'main' 브랜치에 푸시
 
       // 성공적으로 응답 전송
       res
         .status(200)
         .json({
-          message: "Post created and committed",
+          message: "Post created, committed, and pushed",
           fileName: nextFileName,
         });
     } catch (err) {
