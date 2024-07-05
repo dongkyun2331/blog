@@ -2,12 +2,19 @@ import fs from "fs";
 import path from "path";
 import { simpleGit } from "simple-git";
 
+const git = simpleGit();
+
+if (process.env.GIT_USER && process.env.GIT_TOKEN) {
+  git.env("GIT_ASKPASS", "echo");
+  git.env("GIT_USERNAME", process.env.GIT_USER);
+  git.env("GIT_PASSWORD", process.env.GIT_TOKEN);
+}
+
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const { title, author, keywords, content } = req.body;
     const date = new Date().toISOString().split("T")[0];
 
-    // _posts 디렉터리의 파일 목록을 가져옴
     const postsDir = path.join(process.cwd(), "_posts");
     const files = fs.readdirSync(postsDir);
     const postNumbers = files
@@ -16,7 +23,6 @@ export default async function handler(req, res) {
 
     const nextPostNumber = Math.max(0, ...postNumbers) + 1;
     const nextFileName = `${nextPostNumber}. ${title.replace(/\s+/g, "-")}.md`;
-
     const filePath = path.join(postsDir, nextFileName);
 
     const fileContent = `---
@@ -30,16 +36,14 @@ ${content}
 `;
 
     try {
-      // 파일 작성
+      console.log("Writing file:", filePath);
       await fs.promises.writeFile(filePath, fileContent);
 
-      // Git 커밋 및 푸시
-      const git = simpleGit();
+      console.log("Adding to git:", filePath);
       await git.add(filePath);
       await git.commit(`Add new post: ${nextPostNumber}. ${title}`);
-      await git.push("origin", "main"); // 'main' 브랜치에 푸시
+      await git.push("origin", "main");
 
-      // 성공적으로 응답 전송
       res
         .status(200)
         .json({
@@ -47,8 +51,10 @@ ${content}
           fileName: nextFileName,
         });
     } catch (err) {
-      // 오류 발생 시 응답 전송
-      res.status(500).json({ error: "Failed to create post" });
+      console.error("Error during post creation:", err);
+      res
+        .status(500)
+        .json({ error: "Failed to create post", details: err.message });
     }
   } else {
     res.status(405).json({ error: "Method not allowed" });
