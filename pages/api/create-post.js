@@ -16,6 +16,13 @@ export default async function handler(req, res) {
     const date = new Date().toISOString().split("T")[0];
 
     const postsDir = path.join(process.cwd(), "_posts");
+
+    // 폴더가 존재하는지 확인
+    if (!fs.existsSync(postsDir)) {
+      console.error("Posts directory does not exist:", postsDir);
+      return res.status(500).json({ error: "Posts directory does not exist" });
+    }
+
     const files = fs.readdirSync(postsDir);
     const postNumbers = files
       .map((file) => parseInt(file.split(".")[0], 10))
@@ -41,15 +48,15 @@ ${content}
 
       console.log("Adding to git:", filePath);
       await git.add(filePath);
+      console.log("Committing to git:", filePath);
       await git.commit(`Add new post: ${nextPostNumber}. ${title}`);
+      console.log("Pushing to git repository");
       await git.push("origin", "main");
 
-      res
-        .status(200)
-        .json({
-          message: "Post created, committed, and pushed",
-          fileName: nextFileName,
-        });
+      res.status(200).json({
+        message: "Post created, committed, and pushed",
+        fileName: nextFileName,
+      });
     } catch (err) {
       console.error("Error during post creation:", err);
       res
