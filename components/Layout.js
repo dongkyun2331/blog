@@ -1,5 +1,3 @@
-// components/Layout.js
-
 import { useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
@@ -20,13 +18,25 @@ export default function Layout({ children }) {
         <Link href="/" style={{ textDecoration: "none", color: "inherit" }}>
           <h1>FORI</h1>
         </Link>
+        <ins
+          className="kakao_ad_area"
+          style={{ display: "none" }} // 수정된 부분
+          data-ad-unit="DAN-4Ps3T4Ev2KEOiBtI"
+          data-ad-width="300"
+          data-ad-height="250"
+        ></ins>
+        <script
+          type="text/javascript"
+          src="//t1.daumcdn.net/kas/static/ba.min.js"
+          async
+        ></script>
       </nav>
       {children}
       <button onClick={toggleSidebar} className={utilStyles.sidebarButton}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="24"
-          viewBox="0 0 4"
+          viewBox="0 0 24 24" // 여기도 '0 0 24 24'로 수정
           width="24"
           focusable="false"
           style={{
