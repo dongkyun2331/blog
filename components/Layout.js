@@ -18,13 +18,6 @@ export default function Layout({ children }) {
         <Link href="/" style={{ textDecoration: "none", color: "inherit" }}>
           <h1>FORI</h1>
         </Link>
-        <ins
-          className="kakao_ad_area"
-          style={{ display: "none" }} // 수정된 부분
-          data-ad-unit="DAN-4Ps3T4Ev2KEOiBtI"
-          data-ad-width="300"
-          data-ad-height="250"
-        ></ins>
         <script
           type="text/javascript"
           src="//t1.daumcdn.net/kas/static/ba.min.js"
@@ -52,6 +45,13 @@ export default function Layout({ children }) {
       <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar}>
         <YoutubeAudioPlayer />
       </Sidebar>
+      <ins
+        className="kakao_ad_area"
+        style={{ display: "none" }} // 수정된 부분
+        data-ad-unit="DAN-4Ps3T4Ev2KEOiBtI"
+        data-ad-width="300"
+        data-ad-height="250"
+      ></ins>
     </div>
   );
 }
